@@ -1,0 +1,74 @@
+These codes were readed from the remote controllers using the receiver and ready to use with the emmit.
+
+
+[ Control ventilador ]
+FFE01F -> Modo
+FFA25D -> Velocidad
+FFE21D -> Apagar
+FF906F -> Time
+
+[ Control televisor ]
+
+FDB847 -> Arriba
+FD02FD -> Izquierda
+FD42BD -> Derecha
+FDA25D -> Abajo
+FD827D -> Centro / OK
+
+FD38C7 -> Configuración
+FD708F -> Atrás
+FD6897 -> Vol+
+FD58A7 -> Vol-
+FD28D7 -> Ch+
+FD18E7 -> Ch-
+FDA857 -> Mute
+FDE21D -> Home
+
+FD00FF -> 1
+FD807F -> 2
+FD40BF -> 3
+FD20DF -> 4
+FDA05F -> 5
+FD609F -> 6
+FD10EF -> 7
+FD906F -> 8
+FD50AF -> 9
+FDB04F -> 0
+
+FD3AC5 -> Open Browser
+FDC23F -> Netflix
+FD22DD -> Exit
+FD9867 -> Sleep
+FDE817 -> =
+FDC03F -> Power
+FDE01F -> TV
+FD7887 -> Source
+FD9A65 -> Guide
+FD6A95 -> USB
+FD20DF -> FAV
+FDEA15 -> CHList
+
+FD4AB5 -> Play/Pausa
+FDCA35 -> Detener
+
+FD12ED -> Rojo
+FD926D -> Verde
+FD52AD -> Amarillo
+FD32CD -> Azul
+
+
+Empresa: NOBLEX
+Modelo: DI43X5100 / DI43X5100X
+
+Numero de chasis: MT5655
+Version actual: V8-MT56BLA-LF1V356
+SIACP Versión v5.4
+Date Oct 27 2017 16:52:44
+Panel: ST4251B01-1
+
+
+1 9 5 0 (Modo diseño, contiene todos los menus)
+
+
+
+
