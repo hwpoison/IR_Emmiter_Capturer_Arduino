@@ -1,5 +1,5 @@
 ## IR Transmission / Emission
-This codes intends to demostrate how the IR NEC protocol works using Arduino. You can use the receiver for clone remote controllers commands and the emisor to send it to the devices.
+This codes intends to demostrate from scratch how the IR NEC protocol works. You can use the receiver for clone remote controllers commands and the emisor to send it to the devices.
 
 1. Emisor with a simple IR LED
 2. Reception using the VS1838B sensor

@@ -1,32 +1,14 @@
-/* VS1838B sensor
-.......(H).......
-.....|..|..|.....
-... |...|...|....
-...|....|....|...
-...|....|....|...
-..IN..GND..VCC...
+#include "IR_Recept.h"
 
-IN = PWM Pin 11
-VCC= 2.7V-5.5V
+IRRecept::IRRecept() {}
 
-Datasheet = https://www.alldatasheet.es/datasheet-pdf/pdf/1132465/ETC2/VS1838B.html
-NEC Specifications = https://www.sbprojects.net/knowledge/ir/nec.php
-*/
-const int RECV_PIN = 11;  // IR Sensor IN
-
-void setup() {
-  Serial.begin(9600);
-  pinMode(RECV_PIN, INPUT);
+void IRRecept::setup(int inputPin){
+  this->inputPin = inputPin;
+  pinMode(inputPin, INPUT);
 }
 
-void loop() {
-  unsigned long data = 0;
-  if (readIR(&data)) {
-    Serial.println(data, HEX);
-  }
-}
-
-bool readIR(unsigned long *result) {
+unsigned long IRRecept::readNEC() {
+  unsigned long result = 0x0;
   /// 1 - Receive the start signal
 
   // NEC = Start pulse: 9 ms HIGH + 4.5 ms LOW.
@@ -34,11 +16,11 @@ bool readIR(unsigned long *result) {
   // PIN LOW  = Active signal
 
   // Waits while the ping isn't receiving anything
-  while (digitalRead(RECV_PIN) == HIGH);
+  while (digitalRead(inputPin) == HIGH);
 
   // We receive a signal, starts the count while the signal is active
   unsigned long startTime = micros();
-  while (digitalRead(RECV_PIN) == LOW);
+  while (digitalRead(inputPin) == LOW);
 
   // Now the signal is off, calculate the time diff and get the first timestamp
   // Here we'll determinate if the protocol is NEC (9ms) or SONY (2.4ms)
@@ -48,10 +30,10 @@ bool readIR(unsigned long *result) {
 
   // Starts again the count while signal is not active
   startTime = micros();
-  while (digitalRead(RECV_PIN) == HIGH);
+  while (digitalRead(inputPin) == HIGH);
 
   // 2 - Recive the second signal
-  // Now that the RECV_PIN received the second signal (that contains the data)
+  // Now that the inputPin received the second signal (that contains the data)
   // We will calculate the time diff so we get the second timestamp
   if (micros() - startTime < 4000) return false;
 
@@ -59,16 +41,16 @@ bool readIR(unsigned long *result) {
   // Now NEC start is confirmed
   // Start 32bit data read
   for (int i = 0; i < 32; i++) {
-    while (digitalRead(RECV_PIN) == LOW);  // Waits until HIGH (off)
+    while (digitalRead(inputPin) == LOW);  // Waits until HIGH (off)
     unsigned long pulseDuration = micros();
-    while (digitalRead(RECV_PIN) == HIGH); // Waits until LOW (on)
+    while (digitalRead(inputPin) == HIGH); // Waits until LOW (on)
     pulseDuration = micros() - pulseDuration;
 
     // If is 1 or 0
     if (pulseDuration > 1000) {  // 1 is a long pulse
-      *result |= (1UL << (31 - i));
+      result |= (1UL << (31 - i));
     }
   }
   
-  return true;
+  return result;
 }
